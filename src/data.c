@@ -1089,12 +1089,22 @@ data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, in
 
 void *load_thread(void *ptr)
 {
+    //printf("running load_thread() in data.c\n");
     //printf("Loading data: %d\n", rand());
     load_args a = *(struct load_args*)ptr;
     if(a.exposure == 0) a.exposure = 1;
     if(a.saturation == 0) a.saturation = 1;
     if(a.aspect == 0) a.aspect = 1;
 
+    /*printf("given data type: %d\n", a.type);
+    printf("available data types:\n \
+        CLASSIFICATION_DATA: %d\n, DETECTION_DATA: %d\n, CAPTCHA_DATA: %d\n, REGION_DATA: %d\n, IMAGE_DATA: %d\n, \
+        COMPARE_DATA: %d\n, WRITING_DATA: %d\n, SWAG_DATA: %d\n, TAG_DATA: %d\n, OLD_CLASSIFICATION_DATA: %d\n, \
+        STUDY_DATA: %d\n, DET_DATA: %d\n, SUPER_DATA: %d\n, LETTERBOX_DATA: %d\n, REGRESSION_DATA: %d\n, \
+        SEGMENTATION_DATA: %d\n, INSTANCE_DATA: %d\n, ISEG_DATA: %d\n", CLASSIFICATION_DATA, DETECTION_DATA, \
+        CAPTCHA_DATA, REGION_DATA, IMAGE_DATA, COMPARE_DATA, WRITING_DATA, SWAG_DATA, TAG_DATA, \
+        OLD_CLASSIFICATION_DATA, STUDY_DATA, DET_DATA, SUPER_DATA, LETTERBOX_DATA, REGRESSION_DATA, \
+        SEGMENTATION_DATA, INSTANCE_DATA, ISEG_DATA);*/
     if (a.type == OLD_CLASSIFICATION_DATA){
         *a.d = load_data_old(a.paths, a.n, a.m, a.labels, a.classes, a.w, a.h);
     } else if (a.type == REGRESSION_DATA){
@@ -1134,6 +1144,7 @@ void *load_thread(void *ptr)
 
 pthread_t load_data_in_thread(load_args args)
 {
+    //printf("running load_data_in_thread() in data.c\n");
     pthread_t thread;
     struct load_args *ptr = calloc(1, sizeof(struct load_args));
     *ptr = args;
@@ -1143,6 +1154,7 @@ pthread_t load_data_in_thread(load_args args)
 
 void *load_threads(void *ptr)
 {
+    //printf("running load_threads() in data.c\n");
     int i;
     load_args args = *(load_args *)ptr;
     if (args.threads == 0) args.threads = 1;
@@ -1179,6 +1191,7 @@ void load_data_blocking(load_args args)
 
 pthread_t load_data(load_args args)
 {
+    //printf("running load_data() in data.c\n");
     pthread_t thread;
     struct load_args *ptr = calloc(1, sizeof(struct load_args));
     *ptr = args;

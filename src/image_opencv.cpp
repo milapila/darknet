@@ -89,7 +89,9 @@ image get_image_from_stream(void *p)
 
 image load_image_cv(char *filename, int channels)
 {
+    printf("load_image_cv() called with channels=%d\n", channels);
     int flag = -1;
+    /*fprintf(stderr, "Set to %d channels\n (image_opencv/load_image_cv)", channels);*/
     if (channels == 0) flag = -1;
     else if (channels == 1) flag = 0;
     else if (channels == 3) flag = 1;

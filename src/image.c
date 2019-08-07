@@ -1316,6 +1316,8 @@ image load_image_stb(char *filename, int channels)
 
 image load_image(char *filename, int w, int h, int c)
 {
+    //printf("load_image() called\n");
+    //printf("w=%d, h=%d, c=%d\n",w,h,c); /*filename: %s,*/
 #ifdef OPENCV
     image out = load_image_cv(filename, c);
 #else
@@ -1332,9 +1334,28 @@ image load_image(char *filename, int w, int h, int c)
 
 image load_image_color(char *filename, int w, int h)
 {
+    //printf("load_image_color() called\n");
     return load_image(filename, w, h, 3);
 }
 
+image load_image_k_channels(char *filename, int w, int h)
+{
+    //printf("load_image_color() called\n");
+    // loop over k channels
+    // load image using opencv (1/3 channels)
+    // merge images and return
+    return load_image(filename, w, h, 3);
+}
+
+image load_image_rgbd(char *filename, int w, int h)
+{
+    //printf("load_image_color() called\n");
+    image image_rgb = load_image(filename, w, h, 3);
+    image image_d = load_image(filename, w, h, 1); //1 or 3 - depth encoding?
+    // merge images and return
+    //image rgbd = ;
+    return load_image(filename, w, h, 3);
+}
 image get_image_layer(image m, int l)
 {
     image out = make_image(m.w, m.h, 1);

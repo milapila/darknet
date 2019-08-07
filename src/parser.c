@@ -761,6 +761,8 @@ network *parse_network_cfg(char *filename)
     params.time_steps = net->time_steps;
     params.net = net;
 
+    printf("Input Channels %d\n",params.c);
+
     size_t workspace_size = 0;
     n = n->next;
     int count = 0;
@@ -859,6 +861,8 @@ network *parse_network_cfg(char *filename)
             params.c = l.out_c;
             params.inputs = l.outputs;
         }
+
+        printf("Output Channels %d\n",params.c);
     }
     free_list(sections);
     layer out = get_network_output_layer(net);
