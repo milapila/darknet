@@ -1338,6 +1338,7 @@ image load_image_color(char *filename, int w, int h)
     return load_image(filename, w, h, 3);
 }
 
+/*
 image load_image_k_channels(char *filename, int w, int h)
 {
     //printf("load_image_color() called\n");
@@ -1356,6 +1357,8 @@ image load_image_rgbd(char *filename, int w, int h)
     //image rgbd = ;
     return load_image(filename, w, h, 3);
 }
+*/
+
 image get_image_layer(image m, int l)
 {
     image out = make_image(m.w, m.h, 1);

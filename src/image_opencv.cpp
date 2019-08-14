@@ -89,7 +89,7 @@ image get_image_from_stream(void *p)
 
 image load_image_cv(char *filename, int channels)
 {
-    printf("load_image_cv() called with channels=%d\n", channels);
+    //printf("load_image_cv() called with channels=%d\n", channels);
     int flag = -1;
     /*fprintf(stderr, "Set to %d channels\n (image_opencv/load_image_cv)", channels);*/
     if (channels == 0) flag = -1;
@@ -108,6 +108,9 @@ image load_image_cv(char *filename, int channels)
         return make_image(10,10,3);
         //exit(0);
     }
+    //int nDims = m.dims;
+    //int lastDim = m.size[nDims-1];
+    //printf("Mat dimensions: %d, %d",nDims, lastDim);
     image im = mat_to_image(m);
     return im;
 }
